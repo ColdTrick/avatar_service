@@ -14,6 +14,9 @@ elgg_register_event_handler('init','system','avatar_service_init');
 function avatar_service_init() {
 	// page handler for search actions and results
 	elgg_register_page_handler('avatar_service', 'avatar_service_page_handler');
+	
+	// walled garden hook
+	elgg_register_plugin_hook_handler('public_pages', 'walled_garden', 'avatar_service_public_pages_hook');
 }
 
 /**
@@ -126,4 +129,21 @@ function avatar_service_get_image($params) {
 	unlink($tmpfname);
 		
 	return $result;
+}
+
+/**
+ * Extends the walled garden public pages with the avatar_service page handler
+ *
+ * @param string $hook        hook name
+ * @param string $type        hook type
+ * @param array  $returnvalue current return value
+ * @param array  $params      parameters
+ *
+ * @return array
+ */
+function avatar_service_public_pages_hook($hook, $type, $returnvalue, $params) {
+	
+	$returnvalue[] = 'avatar_service/.*';
+	
+	return $returnvalue;
 }
