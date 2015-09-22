@@ -116,7 +116,7 @@ function avatar_service_get_image($params) {
 	}
 	
 	// create temp file for resizing
-	$tmpfname = tempnam(sys_get_temp_dir(), 'elgg_avatar_service');
+	$tmpfname = tempnam(elgg_get_data_path(), 'elgg_avatar_service');
 	
 	$handle = fopen($tmpfname, 'w');
 	fwrite($handle, $image_data);
