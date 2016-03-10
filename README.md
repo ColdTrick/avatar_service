@@ -1,5 +1,9 @@
 # Avatar Service
 
+[![Build Status](https://scrutinizer-ci.com/g/ColdTrick/avatar_service/badges/build.png?b=master)](https://scrutinizer-ci.com/g/ColdTrick/avatar_service/build-status/master)
+[![Latest Stable Version](https://poser.pugx.org/coldtrick/avatar_service/v/stable.svg)](https://packagist.org/packages/coldtrick/avatar_service)
+[![License](https://poser.pugx.org/coldtrick/avatar_service/license.svg)](https://packagist.org/packages/coldtrick/avatar_service)
+
 Provides a service to get an Elgg avatar in a Gravatar like way
 
 ## How to use
