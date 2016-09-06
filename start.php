@@ -4,7 +4,7 @@
  */
 
 // register default Elgg event
-elgg_register_event_handler('init','system','avatar_service_init');
+elgg_register_event_handler('init', 'system', 'avatar_service_init');
 
 /**
  * Initializes the plugin
@@ -71,7 +71,7 @@ function avatar_service_page_handler($page) {
  *
  * @param string $md5
  *
- * @return \ElggUser, false
+ * @return false|\ElggUser
  */
 function avatar_service_get_user_by_md5($md5) {
 	if (empty($md5)) {

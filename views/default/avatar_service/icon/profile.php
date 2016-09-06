@@ -1,8 +1,7 @@
 <?php
 
 $user = elgg_extract('user', $vars);
-
-if (empty($user)) {
+if (!($user instanceof ElggUser)) {
 	return;
 }
 
@@ -50,4 +49,3 @@ $result = get_resized_image_from_existing_file($tmpfname, 2048, 2048, true, $x1,
 unlink($tmpfname);
 
 echo $result;
-
