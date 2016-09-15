@@ -1,6 +1,10 @@
 Version history
 ===============
 
+1.0 (2016-09-15):
+
+- changed: fetching default user icon now using views
+
 0.1 (2016-03-10):
 
 - added: avatar_service can now be used in walled garden mode
