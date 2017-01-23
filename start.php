@@ -116,18 +116,25 @@ function avatar_service_get_image($params) {
 	}
 	
 	// create temp file for resizing
-	$tmpfname = tempnam(elgg_get_data_path(), 'elgg_avatar_service');
+	$tmpfname = tempnam(elgg_get_data_path(), 'avatar_service') . '.jpg';
+	file_put_contents($tmpfname, $image_data);
 	
-	$handle = fopen($tmpfname, 'w');
-	fwrite($handle, $image_data);
-	fclose($handle);
+	$params = [
+		'w' => $size,
+		'h' => $size,
+		'square' => true,
+		'upscale' => true,
+	];
 		
 	// apply resizing
-	$result = get_resized_image_from_existing_file($tmpfname, $size, $size, true, 0, 0, 0, 0, true);
+	elgg_save_resized_image($tmpfname, null, $params);
+	
+	// get resized image
+	$result = file_get_contents($tmpfname);
 	
 	// remove temp file
 	unlink($tmpfname);
-		
+	
 	return $result;
 }
 

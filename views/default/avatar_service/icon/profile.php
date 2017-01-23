@@ -5,21 +5,13 @@ if (!($user instanceof ElggUser)) {
 	return;
 }
 
-$icontime = $user->icontime;
-if (empty($icontime)) {
+if (!$user->hasIcon('master')) {
 	return;
 }
 
-$user_guid = $user->getGUID();
+$icon = $user->getIcon('master');
 
-$filehandler = new ElggFile();
-$filehandler->owner_guid = $user_guid;
-$filehandler->setFilename("profile/{$user_guid}master.jpg");
-
-if ($filehandler->exists()) {
-	$image_data = $filehandler->grabFile();
-}
-
+$image_data = $icon->grabFile();
 if (empty($image_data)) {
 	return;
 }
@@ -29,23 +21,28 @@ $x2 = $user->x2;
 $y1 = $user->y1;
 $y2 = $user->y2;
 
-if ($x1 === null) {
-	return $image_data;
+if (($x1 === null) || ($x1 === $x2) || ($y1 === $y2)) {
+	echo $image_data;
+	return;
 }
 
+// create tempfile for user cropping
+$temp_filename = tempnam(elgg_get_data_path(), 'avatar_service') . '.jpg';
+$params = [
+	'w' => 2048,
+	'h' => 2048,
+	'x1' => $x1,
+	'y1' => $y1,
+	'x2' => $x2,
+	'y2' => $y2,
+	'square' => true,
+	'upscale' => false,
+];
+
 // apply user cropping config
-
-// create temp file for resizing
-$tmpfname = tempnam(elgg_get_data_path(), 'elgg_avatar_service');
-
-$handle = fopen($tmpfname, 'w');
-fwrite($handle, $image_data);
-fclose($handle);
-
-// apply resizing
-$result = get_resized_image_from_existing_file($tmpfname, 2048, 2048, true, $x1, $y1, $x2, $y2, false);
+if (elgg_save_resized_image($icon->getFilenameOnFilestore(), $temp_filename, $params)) {
+	echo file_get_contents($temp_filename);
+}
 
 // remove temp file
-unlink($tmpfname);
-
-echo $result;
+unlink($temp_filename);
