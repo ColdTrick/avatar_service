@@ -1,6 +1,11 @@
 Version history
 ===============
 
+2.0 (2017-01-26):
+
+- changed: increased Elgg version requirement to 2.3
+- changed: use new Elgg icon api functions
+
 1.0 (2016-09-15):
 
 - changed: fetching default user icon now using views
