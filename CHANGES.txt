@@ -1,6 +1,11 @@
 Version history
 ===============
 
+2.0.1 (2017-03-24):
+
+- changed: minimal Elgg version requirement increased to 2.3.1
+- fixed: no longer create empty files in dataroot
+
 2.0 (2017-01-26):
 
 - changed: increased Elgg version requirement to 2.3
