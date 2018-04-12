@@ -3,7 +3,7 @@
 	"description": "Provides a service to get an Elgg avatar in a Gravatar like way",
 	"type": "elgg-plugin",
 	"keywords": ["elgg", "plugin", "avatar"],
-	"license": "GPL-2.0",
+	"license": "GPL-2.0-only",
 	"support": {
 		"source": "https://github.com/ColdTrick/avatar_service",
 		"issues": "https://github.com/ColdTrick/avatar_service/issues"
@@ -16,6 +16,6 @@
 		"coldtrick/releases": "dev-master"
 	},
 	"conflict": {
-		"elgg/elgg": "<2.3.1"
+		"elgg/elgg": "<3.0"
 	}
 }
