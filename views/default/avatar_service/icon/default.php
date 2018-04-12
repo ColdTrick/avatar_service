@@ -1,3 +1,3 @@
 <?php
 
-echo elgg_view('icons/user/defaultlarge.gif', $vars);
+echo elgg_view('icon/user/default/large.gif', $vars);

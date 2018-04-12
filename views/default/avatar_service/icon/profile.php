@@ -27,8 +27,10 @@ if (($x1 === null) || ($x1 === $x2) || ($y1 === $y2)) {
 }
 
 // create tempfile for user cropping
-$temp_path = rtrim(sys_get_temp_dir(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
-$temp_filename = tempnam($temp_path, 'avatar_service');
+$temp_file = elgg_get_temp_file();
+$temp_file->open('write');
+$temp_file->close();
+
 $params = [
 	'w' => 2048,
 	'h' => 2048,
@@ -40,14 +42,15 @@ $params = [
 	'upscale' => false,
 ];
 
+
 // apply user cropping config
 try {
-	if (elgg_save_resized_image($icon->getFilenameOnFilestore(), $temp_filename, $params)) {
-		echo file_get_contents($temp_filename);
+	if (elgg_save_resized_image($icon->getFilenameOnFilestore(), $temp_file->getFilenameOnFilestore(), $params)) {
+		echo $temp_file->grabFile();
 	}
 } catch (Exception $e) {
 	elgg_log("Avatar service: error while applying cropping for {$user->getDisplayName()} => {$e->getMessage()}", 'ERROR');
 }
 
 // remove temp file
-unlink($temp_filename);
+$temp_file->delete();
