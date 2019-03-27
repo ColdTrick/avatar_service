@@ -1,6 +1,11 @@
 Version history
 ===============
 
+3.0 (2019-03-27):
+
+- changed: increased version requirement to Elgg 3
+- changed: updated for Elgg 3
+
 2.1 (2017-05-30):
 
 - changed: plugin layout for better stability
